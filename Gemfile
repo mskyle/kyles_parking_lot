@@ -39,6 +39,7 @@ group :test, :development do
   gem 'valid_attribute'
   gem 'launchy'
   gem 'factory_girl'
+  gem 'rails-pry'
 end
 
 # Use ActiveModel has_secure_password
