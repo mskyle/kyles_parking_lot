@@ -7,7 +7,7 @@ class RegistrationsController < ApplicationController
   def create
     @registration = Registration.new(reg_params)
     if @registration.park
-      flash[:notice] = 'You registered successfully'
+      flash[:notice] = "You registered successfully. #{@registration.neighbor_message}"
       redirect_to '/'
     else
       render :new
