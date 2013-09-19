@@ -5,6 +5,7 @@ feature 'a parker registers her spot', %q{
   I want to register my spot with my name
   So that the parking company can identify my car
 } do
+  # Also includes: 
   # Acceptance Criteria:
 
   # I must specify a first name, last name, email, and parking spot number
@@ -62,19 +63,6 @@ feature 'a parker registers her spot', %q{
     click_on "New registration"
     expect(Registration.count).to eql(prev_count)
     expect(page).to have_content("Email is invalid")
-  end
-
-  scenario "returning user's email is remembered" do
-    visit "/"
-
-    fill_in "First name", with: "Kyle"
-    fill_in "Last name", with: "Hutchinson"
-    fill_in "Spot number", with: 30
-    fill_in "Email", with: "kyle@hutchinson.com"
-
-    click_on "New registration"
-
-    expect(page).to have_field("Email", with: "kyle@hutchinson.com")
   end
 
 end
