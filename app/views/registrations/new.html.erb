@@ -12,9 +12,10 @@
     </div>
   <% end %>
 
-  <% old_email = "" %>
-  <% if @last_registration_id %>
-    <% old_email = Registration.where(id: @last_registration_id).first.email %>
+  <% if @yesterday_registration %>
+    <%= "Yesterday you parked in spot number #{@yesterday_registration.spot_number}." %>
+  <% else %>
+    <%= "You didn't park here yesterday." %>
   <% end %>
 
   <div>
@@ -29,12 +30,12 @@
 
   <div>
     <%= f.label :email %>
-    <%= f.text_field :email, :value => old_email %>
+    <%= f.text_field :email, :value => @last_registration.try(:email) %>
   </div>
 
   <div>
     <%= f.label :spot_number %>
-    <%= f.text_field :spot_number %>
+    <%= f.text_field :spot_number, value: @last_registration.try(:spot_number) %>
   </div>
 
   <%= notice %>

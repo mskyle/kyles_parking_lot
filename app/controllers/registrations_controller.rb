@@ -3,6 +3,11 @@ class RegistrationsController < ApplicationController
   def new
     @registration = Registration.new
     @last_registration_id = session[:last_registration_id]
+    @last_registration = Registration.find_by_id(@last_registration_id)
+    @yesterday_registration = nil    
+    if @last_registration.try(:parked_on) == Date.today.days_ago(1)
+      @yesterday_registration = @last_registration
+    end
   end
 
   def create
