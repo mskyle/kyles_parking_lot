@@ -12,6 +12,11 @@
     </div>
   <% end %>
 
+  <% old_email = "" %>
+  <% if @last_registration_id %>
+    <% old_email = Registration.where(id: @last_registration_id).first.email %>
+  <% end %>
+
   <div>
     <%= f.label :first_name %>
     <%= f.text_field :first_name %>
@@ -24,7 +29,7 @@
 
   <div>
     <%= f.label :email %>
-    <%= f.text_field :email %>
+    <%= f.text_field :email, :value => old_email %>
   </div>
 
   <div>

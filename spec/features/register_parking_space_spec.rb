@@ -64,4 +64,17 @@ feature 'a parker registers her spot', %q{
     expect(page).to have_content("Email is invalid")
   end
 
+  scenario "returning user's email is remembered" do
+    visit "/"
+
+    fill_in "First name", with: "Kyle"
+    fill_in "Last name", with: "Hutchinson"
+    fill_in "Spot number", with: 30
+    fill_in "Email", with: "kyle@hutchinson.com"
+
+    click_on "New registration"
+
+    expect(page).to have_field("Email", with: "kyle@hutchinson.com")
+  end
+
 end
