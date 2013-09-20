@@ -59,4 +59,15 @@ describe Registration do
     end
   end
 
+  describe 'history' do
+    it 'returns a list of all your previous registrations' do
+       FactoryGirl.create(:registration, { :spot_number => 40, :parked_on => Date.today.days_ago(1) } )
+       FactoryGirl.create(:registration, { :spot_number => 40, :parked_on => Date.today.days_ago(2) } )
+       FactoryGirl.create(:registration, { :spot_number => 40, :parked_on => Date.today.days_ago(3) } )
+      new_registration = FactoryGirl.build(:registration)
+      expect(new_registration.history).to be_true
+      expect(new_registration.history.count).to eql(3)      
+    end
+  end
+
 end

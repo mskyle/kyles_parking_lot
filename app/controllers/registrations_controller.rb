@@ -14,21 +14,31 @@ class RegistrationsController < ApplicationController
     @registration = Registration.new(reg_params)
     if @registration.park
       session[:last_registration_id] = @registration.id
-      flash[:notice] = "You registered successfully. #{@registration.neighbor_message}"
-      redirect_to '/'
+      redirect_to @registration, notice: "You registered successfully."
     else
       render :new
     end
   end
 
+  def show
+    @registration = Registration.find(params[:id])
+  end
+
+  def index 
+    @registrations = Registration.all
+    @last_registration_id = session[:last_registration_id]
+    @last_registration = Registration.find_by_id(@last_registration_id)
+    @my_registrations = @last_registration.history
+  end
+
 protected
 
-def reg_params
-  params.require(:registration).permit(
-    :first_name,
-    :last_name,
-    :email,
-    :spot_number)
-end
+  def reg_params
+    params.require(:registration).permit(
+      :first_name,
+      :last_name,
+      :email,
+      :spot_number)
+  end
 
 end

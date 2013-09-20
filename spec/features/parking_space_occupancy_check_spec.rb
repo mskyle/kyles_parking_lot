@@ -12,7 +12,7 @@ feature "parkers can't check into spots that already have cars in them", %q{
 
   scenario 'user attempts to register a space that is already in use' do 
 
-    visit "/"
+    visit new_registration_path
     fill_in "First name", with: "Kyle"
     fill_in "Last name", with: "Hutchinson"
     fill_in "Spot number", with: 30
@@ -22,6 +22,7 @@ feature "parkers can't check into spots that already have cars in them", %q{
 
     prev_count = Registration.count 
 
+    visit new_registration_path
     fill_in "First name", with: "Kyle"
     fill_in "Last name", with: "Hutchinson"
     fill_in "Spot number", with: 30
@@ -35,7 +36,7 @@ feature "parkers can't check into spots that already have cars in them", %q{
 
   scenario 'user can register a space that is not already in use' do 
 
-    visit "/"
+    visit new_registration_path
     fill_in "First name", with: "Kyle"
     fill_in "Last name", with: "Hutchinson"
     fill_in "Spot number", with: 30
@@ -45,6 +46,7 @@ feature "parkers can't check into spots that already have cars in them", %q{
 
     prev_count = Registration.count 
 
+    visit new_registration_path
     fill_in "First name", with: "Kyle"
     fill_in "Last name", with: "Hutchinson"
     fill_in "Spot number", with: 31

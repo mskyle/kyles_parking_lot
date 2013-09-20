@@ -1,0 +1,31 @@
+<h1>Your registrations</h1>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Spot number</th>
+      <th>Date</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @my_registrations.each do |registration| %>
+      <tr>
+        <td><%= registration.spot_number %></td>
+        <td><%= registration.parked_on %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+  <% if @yesterday_registration %>
+    <%= "Yesterday you parked in spot number #{@yesterday_registration.spot_number}." %>
+  <% else %>
+    <%= "You didn't park here yesterday." %>
+  <% end %>
+
+<%= link_to 'New registration', new_registration_path %>

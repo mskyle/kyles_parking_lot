@@ -1,0 +1,22 @@
+<%= notice %>
+<p>
+  <strong>Name:</strong>
+  <%= "#{@registration.first_name} #{@registration.last_name}" %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @registration.email %>
+</p>
+
+<p>
+  <strong>Spot number:</strong>
+  <%= @registration.spot_number %>
+</p>
+
+<%= @registration.neighbor_message %>
+
+<% if @registration.history.length > 1 %>
+  <%= link_to "Parking history", registrations_path %>
+<% end %>
+

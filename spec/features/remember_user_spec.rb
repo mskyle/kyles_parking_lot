@@ -1,5 +1,4 @@
 require 'spec_helper'
-
 feature 'system remembers parker info from previous day', %q{
   As a parker
   I want to know what spot I parked in yesterday
@@ -43,9 +42,11 @@ feature 'system remembers parker info from previous day', %q{
   scenario "returning user's email is remembered" do
     old_registration = FactoryGirl.build(:registration)
 
-    visit "/"
+    visit new_registration_path 
     
     reg_form_fill_in(old_registration)
+
+    visit new_registration_path
 
     expect(page).to have_field("Email", with: old_registration.email)
   end
@@ -53,39 +54,39 @@ feature 'system remembers parker info from previous day', %q{
   scenario "returning user's spot from yesterday is remembered" do
     old_registration = FactoryGirl.build(:registration)
 
-    visit "/"
+    visit new_registration_path
 
     reg_form_fill_in(old_registration)
     
     change_reg_date(1)
 
-    visit "/"
+    visit new_registration_path
     expect(page).to have_content("Yesterday you parked in spot number #{old_registration.spot_number}")
   end
 
   scenario "returning user's spot from yesterday is pre-filled in the form" do
     old_registration = FactoryGirl.build(:registration)
 
-    visit "/"
+    visit new_registration_path
 
     reg_form_fill_in(old_registration)
     
     change_reg_date(1)
 
-    visit "/"
+    visit new_registration_path
     expect(page).to have_field("Spot number", with: "#{old_registration.spot_number}")
   end
 
   scenario "if user didn't park yesterday it says so" do
     old_registration = FactoryGirl.build(:registration)
 
-    visit "/"
+    visit new_registration_path
 
     reg_form_fill_in(old_registration)
     
     change_reg_date(2)
 
-    visit "/"
+    visit new_registration_path
     expect(page).to have_content("You didn't park here yesterday")
 
   end
