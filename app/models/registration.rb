@@ -42,4 +42,8 @@ class Registration < ActiveRecord::Base
     end
   end
 
+  def history
+    Registration.where(email: email).order("parked_on DESC")
+  end
+
 end
